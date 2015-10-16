@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_trang_chu" android:icon="@android:drawable/ic_dialog_dialer"
+            android:title="Trang chủ" android:checked="true"/>
+        <item android:id="@+id/nav_truyen_vua_doc" android:icon="@android:drawable/ic_menu_view"
+            android:title="Truyện vừa đọc" />
+        <item android:id="@+id/nav_truyen_cua_toi" android:icon="@android:drawable/ic_menu_myplaces"
+            android:title="Truyện của tôi" />
+    </group>
+
+    <item android:title="Thể loại">
+        <menu>
+            <item android:id="@+id/nav_ngon_tinh"
+                android:title="Ngôn Tình" />
+            <item android:id="@+id/nav_tien_hiep"
+                android:title="Tiên Hiệp" />
+            <item android:id="@+id/nav_kiem_hiep"
+                android:title="Kiếm Hiệp" />
+            <item android:id="@+id/nav_quan_su"
+                android:title="Quân sự" />
+            <item android:id="@+id/nav_lich_su"
+                android:title="Lịch sử" />
+            <item android:id="@+id/nav_truyen_ma"
+                android:title="Truyện ma" />
+            <item android:id="@+id/nav_huyen_huyen"
+                android:title="Huyền Huyễn" />
+        </menu>
+    </item>
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_cai_dat" android:icon="@android:drawable/ic_menu_manage"
+            android:title="Cài đặt" />
+        <item android:id="@+id/nav_ho_tro" android:icon="@android:drawable/ic_menu_call"
+            android:title="Hỗ trợ" />
+    </group>
+
+</menu>
