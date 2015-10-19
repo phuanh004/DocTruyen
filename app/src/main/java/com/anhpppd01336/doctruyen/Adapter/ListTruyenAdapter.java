@@ -51,28 +51,29 @@ public class ListTruyenAdapter extends BaseAdapter {
             LayoutInflater inflater;
             inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.item_listview_truyen, null);
+        }
 
-            tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
-            tvTomTat = (TextView) convertView.findViewById(R.id.tvTomTat);
-            imgBiaTruyen = (ImageView) convertView.findViewById(R.id.imgBiaTruyen);
-            Typeface customFont = Typeface.createFromAsset(mContext.getAssets(), "fonts/MyriadPro.ttf");
+        tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
+        tvTomTat = (TextView) convertView.findViewById(R.id.tvTomTat);
+        imgBiaTruyen = (ImageView) convertView.findViewById(R.id.imgBiaTruyen);
+        Typeface customFont = Typeface.createFromAsset(mContext.getAssets(), "fonts/MyriadPro.ttf");
 
-            DanhSachTruyen truyen = mListTruyen.get(position);
-            tvTitle.setTypeface(customFont);
-            if(truyen.getTenTruyen().length()>=22) {
-                tvTitle.setText(truyen.getTenTruyen().substring(0,22) + "...");
-            }else {
-                tvTitle.setText(truyen.getTenTruyen() + "");
-            }
-            tvTomTat.setText(truyen.getTomTatTruyen().substring(0,150)+"...");
-            for(int i=0;i<mListTruyen.size();i++) {
-                if (position == i) {
-                    String uri = "drawable/biatruyen"+ i;
-                    int imageResource = mContext.getResources().getIdentifier(uri, null, mContext.getPackageName());
-                    imgBiaTruyen.setImageResource(imageResource);
-                }
+        DanhSachTruyen truyen = mListTruyen.get(position);
+        tvTitle.setTypeface(customFont);
+        if(truyen.getTenTruyen().length()>=22) {
+            tvTitle.setText(truyen.getTenTruyen().substring(0,22) + "...");
+        }else {
+            tvTitle.setText(truyen.getTenTruyen() + "");
+        }
+        tvTomTat.setText(truyen.getTomTatTruyen().substring(0,150)+"...");
+        for(int i=0;i<mListTruyen.size();i++) {
+            if (position == i) {
+                String uri = "drawable/biatruyen"+ i;
+                int imageResource = mContext.getResources().getIdentifier(uri, null, mContext.getPackageName());
+                imgBiaTruyen.setImageResource(imageResource);
             }
         }
+
         return convertView;
     }
 }

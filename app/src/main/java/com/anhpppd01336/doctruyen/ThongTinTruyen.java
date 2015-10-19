@@ -3,16 +3,14 @@ package com.anhpppd01336.doctruyen;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.anhpppd01336.doctruyen.Data.BaseActivity;
-import com.anhpppd01336.doctruyen.Data.DanhSachTruyen;
-import static com.anhpppd01336.doctruyen.MainActivity.danhSachTruyen;
+
+import static com.anhpppd01336.doctruyen.TrangChuFragment.danhSachTruyen;
 
 public class ThongTinTruyen extends BaseActivity {
 
