@@ -66,8 +66,9 @@ public class TruyenTranhOnlineFragment extends ListFragment {
                     bundle.putString("title", arrTruyen.get(position).getTenTruyen());
                     bundle.putString("tomtat", arrTruyen.get(position).getTomTatTruyen());
                     bundle.putString("image", arrTruyen.get(position).getBiaTruyen());
+                    bundle.putString("link", arrTruyen.get(position).getLinkTruyen());
+                    bundle.putString("type", "online");
 
-                    Log.e("img "+position,arrTruyen.get(position).getBiaTruyen());
 
                     Intent intentThongTinTruyen = new Intent(getActivity(), ThongTinTruyen.class);
                     intentThongTinTruyen.putExtras(bundle);

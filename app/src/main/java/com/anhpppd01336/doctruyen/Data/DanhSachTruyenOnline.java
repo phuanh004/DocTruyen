@@ -4,14 +4,13 @@ package com.anhpppd01336.doctruyen.Data;
  * Created by Anh Pham on 21/10/2015.
  */
 public class DanhSachTruyenOnline {
-    String biaTruyen, tenTruyen, tomTatTruyen, linkTruyen, tacGia;
+    String biaTruyen, tenTruyen, tomTatTruyen, linkTruyen;
 
-    public DanhSachTruyenOnline(String biaTruyen, String tenTruyen, String tomTatTruyen, String linkTruyen, String tacGia) {
+    public DanhSachTruyenOnline(String biaTruyen, String tenTruyen, String tomTatTruyen, String linkTruyen) {
         this.biaTruyen = biaTruyen;
         this.tenTruyen = tenTruyen;
         this.tomTatTruyen = tomTatTruyen;
         this.linkTruyen = linkTruyen;
-        this.tacGia = tacGia;
     }
     public DanhSachTruyenOnline() {
     }
@@ -46,13 +45,5 @@ public class DanhSachTruyenOnline {
 
     public void setLinkTruyen(String linkTruyen) {
         this.linkTruyen = linkTruyen;
-    }
-
-    public String getTacGia() {
-        return tacGia;
-    }
-
-    public void setTacGia(String tacGia) {
-        this.tacGia = tacGia;
     }
 }

@@ -26,7 +26,6 @@ import static com.anhpppd01336.doctruyen.Xml.XmlTruyenChuOnline.arrTruyen;
  */
 public class TruyenChuOnlineFragment extends ListFragment {
 
-
     public TruyenChuOnlineFragment() {
         // Required empty public constructor
     }
@@ -63,6 +62,8 @@ public class TruyenChuOnlineFragment extends ListFragment {
                     bundle.putString("title", arrTruyen.get(position).getTenTruyen());
                     bundle.putString("tomtat", arrTruyen.get(position).getTomTatTruyen());
                     bundle.putString("image", arrTruyen.get(position).getBiaTruyen());
+                    bundle.putString("link", arrTruyen.get(position).getLinkTruyen());
+                    bundle.putString("type", "online");
 
                     Intent intentThongTinTruyen = new Intent(getActivity(), ThongTinTruyen.class);
                     intentThongTinTruyen.putExtras(bundle);

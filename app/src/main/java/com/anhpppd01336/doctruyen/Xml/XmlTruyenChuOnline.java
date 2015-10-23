@@ -64,9 +64,6 @@ public class XmlTruyenChuOnline {
                                     .replaceAll("\\<.*?\\>", "").replaceAll("&nbsp;"," ");
                             obj.setTomTatTruyen(finalDescription);
                         }
-                        if (nameTag.equals("dc:creator")) {
-                            obj.setTacGia(text);
-                        }
                         if (nameTag.equals("item")) {
                             arrTruyen.add(obj);
                         }
