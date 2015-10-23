@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.anhpppd01336.doctruyen" >
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,11 +25,12 @@
         <activity
             android:name=".ThongTinTruyen"
             android:label="@string/title_activity_thong_tin_truyen"
-            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.anhpppd01336.doctruyen.MainActivity" />
+        </activity>
+        <activity
+            android:name=".DocTruyenActivity"
+            android:label="@string/title_activity_doc_truyen"
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
     </application>
 

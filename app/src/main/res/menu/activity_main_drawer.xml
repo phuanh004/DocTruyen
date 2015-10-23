@@ -10,22 +10,25 @@
             android:title="Truyện của tôi" />
     </group>
 
-    <item android:title="Thể loại">
+    <item android:title="Truyện Offline">
         <menu>
-            <item android:id="@+id/nav_ngon_tinh"
-                android:title="Ngôn Tình" />
-            <item android:id="@+id/nav_tien_hiep"
-                android:title="Tiên Hiệp" />
-            <item android:id="@+id/nav_kiem_hiep"
-                android:title="Kiếm Hiệp" />
-            <item android:id="@+id/nav_quan_su"
-                android:title="Quân sự" />
-            <item android:id="@+id/nav_lich_su"
-                android:title="Lịch sử" />
-            <item android:id="@+id/nav_truyen_ma"
-                android:title="Truyện ma" />
-            <item android:id="@+id/nav_huyen_huyen"
-                android:title="Huyền Huyễn" />
+            <item android:id="@+id/nav_truyen_tranh_offline"
+                android:title="Truyện Tranh"
+                android:icon="@drawable/comic"/>
+            <item android:id="@+id/nav_truyen_chu_offline"
+                android:title="Truyện Chữ"
+                android:icon="@drawable/document"/>
+        </menu>
+    </item>
+
+    <item android:title="Truyện Online">
+        <menu>
+            <item android:id="@+id/nav_truyen_tranh_online"
+                android:title="Truyện Tranh"
+                android:icon="@drawable/comic"/>
+            <item android:id="@+id/nav_truyen_chu_online"
+                android:title="Truyện Chữ"
+                android:icon="@drawable/document"/>
         </menu>
     </item>
 

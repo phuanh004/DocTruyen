@@ -1,5 +1,10 @@
 package com.anhpppd01336.doctruyen;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -10,6 +15,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.anhpppd01336.doctruyen.Data.BaseActivity;
 
@@ -76,19 +82,19 @@ public class MainActivity extends BaseActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         Fragment fragment = null;
-
-        if (id == R.id.nav_trang_chu) {
-            fragment = new TrangChuFragment();
-        } else if (id == R.id.nav_kiem_hiep) {
-
-        } else if (id == R.id.nav_lich_su) {
-
-        } else if (id == R.id.nav_ngon_tinh) {
-
-        } else if (id == R.id.nav_quan_su) {
-
-        } else if (id == R.id.nav_tien_hiep) {
-
+        switch (id){
+            case R.id.nav_trang_chu:
+                fragment = new TrangChuFragment();
+                break;
+            case R.id.nav_truyen_cua_toi:
+                fragment = new TruyenCuaToiFragment();
+                break;
+            case R.id.nav_truyen_chu_online:
+                fragment = new TruyenChuOnlineFragment();
+                break;
+            case R.id.nav_truyen_tranh_online:
+                fragment = new TruyenTranhOnlineFragment();
+                break;
         }
 
         showFragment(fragment);

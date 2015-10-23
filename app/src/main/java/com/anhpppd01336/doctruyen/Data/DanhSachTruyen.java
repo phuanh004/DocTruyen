@@ -11,10 +11,6 @@ public class DanhSachTruyen {
         this.tenTruyen = tenTruyen;
         this.tomTatTruyen = tomTatTruyen;
     }
-    public DanhSachTruyen(String tenTruyen, String tomTatTruyen) {
-        this.tenTruyen = tenTruyen;
-        this.tomTatTruyen = tomTatTruyen;
-    }
     public DanhSachTruyen() {
     }
 

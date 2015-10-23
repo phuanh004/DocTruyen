@@ -18,8 +18,8 @@
                 android:layout_width="126dp"
                 android:layout_height="193dp"
                 android:id="@+id/imgThongTinBiaTruyen"
-                android:src="@mipmap/ic_launcher"
-                android:background="#000"/>
+                android:src="@drawable/images"
+                android:background="#EEEEEE"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="193dp"
@@ -34,22 +34,22 @@
                     android:textSize="20sp"
                     android:textColor="#000"
                     android:textStyle="bold" />
-                <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    o<TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tvThongTinTomTat"
-                        android:textSize="14sp"
-                        android:text="Noi dung tom tat" />
-                </ScrollView>
-        </LinearLayout>
+            </LinearLayout>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            o<TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvThongTinTomTat"
+                android:textSize="14sp"
+                android:text="Noi dung tom tat" />
+        </ScrollView>
     </LinearLayout>
 
 </LinearLayout>
