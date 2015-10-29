@@ -7,7 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.anhpppd01336.doctruyen.Data.DanhSachTruyen;
+import com.anhpppd01336.doctruyen.Data.DanhSachTruyenOffline;
 import com.anhpppd01336.doctruyen.Data.DanhSachTruyenOnline;
 
 import java.util.ArrayList;
@@ -19,23 +19,30 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "dbDocTruyen";
     public static final int DATABASE_VERSION = 1;
 
-    public void doTableTruyen(SQLiteDatabase db) {
-        String sSQL = "CREATE TABLE tbTruyen (tenTruyen TEXT, tomTat TEXT, biaTruyen TEXT)";
-        db.execSQL(sSQL);
+    public DatabaseHandler(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
+
     public void doTableTruyenVuaDocOnline(SQLiteDatabase db) {
         String sSQL = "CREATE TABLE tbTruyenVuaDocOnline (tenTruyen TEXT, tomTat TEXT, biaTruyen TEXT, link TEXT)";
         db.execSQL(sSQL);
     }
 
-    public DatabaseHandler(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    public void doTableTruyenVuaDocOffline(SQLiteDatabase db) {
+        String sSQL = "CREATE TABLE tbTruyenVuaDocOffline (tenTruyen TEXT, tomTat TEXT, biaTruyen TEXT, noiDung TEXT)";
+        db.execSQL(sSQL);
+    }
+
+    public void doTableTruyenCuaToiOffline(SQLiteDatabase db) {
+        String sSQL = "CREATE TABLE tbTruyenCuaToiOffline (tenTruyen TEXT, tomTat TEXT, biaTruyen TEXT, noiDung TEXT)";
+        db.execSQL(sSQL);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        doTableTruyen(db);
         doTableTruyenVuaDocOnline(db);
+        doTableTruyenVuaDocOffline(db);
+        doTableTruyenCuaToiOffline(db);
     }
 
     @Override
@@ -44,16 +51,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     // Phuong Thuc
-
-    public void addDataThuChi(DanhSachTruyen danhSachTruyen) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("tenTruyen", danhSachTruyen.getTenTruyen());
-        values.put("tomTat", danhSachTruyen.getTomTatTruyen());
-        values.put("biaTruyen", danhSachTruyen.getBiaTruyen());
-        db.insert("tbChiTieu", null, values);
-        db.close();
-    }
     public void addDataTruyenVuaDocOnline(DanhSachTruyenOnline danhSachTruyenOnline) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -65,51 +62,88 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void deleteTruyenVuaDocOnline(String tenTruyen, String link) {
+    public void addDataTruyenVuaDocOffline(DanhSachTruyenOffline danhSachTruyenOffline) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String sSQL = "DELETE FROM tbTruyenVuaDocOnline WHERE tenTruyen='"+tenTruyen+"' AND link='"+link+"'";
+        ContentValues values = new ContentValues();
+        values.put("tenTruyen", danhSachTruyenOffline.getTenTruyen());
+        values.put("tomTat", danhSachTruyenOffline.getTomTatTruyen());
+        values.put("biaTruyen", danhSachTruyenOffline.getBiaTruyen());
+        values.put("noiDung", danhSachTruyenOffline.getNoiDungTruyen());
+        db.insert("tbTruyenVuaDocOffline", null, values);
+        db.close();
+    }
+
+    public void addDataTruyenCuaToiOnline(DanhSachTruyenOnline danhSachTruyenOnline) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("tenTruyen", danhSachTruyenOnline.getTenTruyen());
+        values.put("tomTat", danhSachTruyenOnline.getTomTatTruyen());
+        values.put("biaTruyen", danhSachTruyenOnline.getBiaTruyen());
+        values.put("link", danhSachTruyenOnline.getLinkTruyen());
+        db.insert("tbTruyenCuaToiOnline", null, values);
+        db.close();
+    }
+
+    public void addDataTruyenCuaToiOffline(DanhSachTruyenOffline danhSachTruyenOffline) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("tenTruyen", danhSachTruyenOffline.getTenTruyen());
+        values.put("tomTat", danhSachTruyenOffline.getTomTatTruyen());
+        values.put("biaTruyen", danhSachTruyenOffline.getBiaTruyen());
+        values.put("noiDung", danhSachTruyenOffline.getNoiDungTruyen());
+        db.insert("tbTruyenCuaToiOnline", null, values);
+        db.close();
+    }
+
+    public void deleteTruyenVuaDocOnline() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sSQL = "DELETE * FROM tbTruyenVuaDocOnline";
         db.execSQL(sSQL);
         db.close();
     }
 
-    public ArrayList<DanhSachTruyen> getAllDataTruyen() {
-        ArrayList<DanhSachTruyen> danhSachTruyenArrayList = new ArrayList<>();
-        String sSQL = "SELECT  * FROM tbTruyen";
-        SQLiteDatabase db = this.getReadableDatabase();
-        @SuppressLint("Recycle") Cursor cursor = db.rawQuery(sSQL, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                DanhSachTruyen danhSachTruyen = new DanhSachTruyen();
-                danhSachTruyen.setTenTruyen(cursor.getString(0));
-                danhSachTruyen.setTomTatTruyen(cursor.getString(1));
-                danhSachTruyen.setBiaTruyen(cursor.getString(2));
-
-                danhSachTruyenArrayList.add(danhSachTruyen);
-            } while (cursor.moveToNext());
-        }
-
-        return danhSachTruyenArrayList;
-    }
-    public ArrayList<DanhSachTruyen> getAllDataTruyenVuaDocOnline() {
-        ArrayList<DanhSachTruyen> danhSachTruyenArrayList = new ArrayList<>();
+    public ArrayList<DanhSachTruyenOnline> getAllDataTruyenVuaDocOnline() {
+        ArrayList<DanhSachTruyenOnline> danhSachTruyenArrayList = new ArrayList<>();
         String sSQL = "SELECT  * FROM tbTruyenVuaDocOnline";
         SQLiteDatabase db = this.getReadableDatabase();
         @SuppressLint("Recycle") Cursor cursor = db.rawQuery(sSQL, null);
 
         if (cursor.moveToFirst()) {
             do {
-                DanhSachTruyen danhSachTruyen = new DanhSachTruyen();
-                danhSachTruyen.setTenTruyen(cursor.getString(0));
-                danhSachTruyen.setTomTatTruyen(cursor.getString(1));
-                danhSachTruyen.setBiaTruyen(cursor.getString(2));
+                DanhSachTruyenOnline danhSachTruyenOnline = new DanhSachTruyenOnline();
+                danhSachTruyenOnline.setTenTruyen(cursor.getString(0));
+                danhSachTruyenOnline.setTomTatTruyen(cursor.getString(1));
+                danhSachTruyenOnline.setBiaTruyen(cursor.getString(2));
+                danhSachTruyenOnline.setLinkTruyen(cursor.getString(3));
 
-                danhSachTruyenArrayList.add(danhSachTruyen);
+                danhSachTruyenArrayList.add(danhSachTruyenOnline);
             } while (cursor.moveToNext());
         }
 
         return danhSachTruyenArrayList;
     }
+
+    public ArrayList<DanhSachTruyenOffline> getAllDataTruyenVuaDocOffline() {
+        ArrayList<DanhSachTruyenOffline> danhSachTruyenArrayList = new ArrayList<>();
+        String sSQL = "SELECT  * FROM tbTruyenVuaDocOffline";
+        SQLiteDatabase db = this.getReadableDatabase();
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery(sSQL, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                DanhSachTruyenOffline danhSachTruyenOffline = new DanhSachTruyenOffline();
+                danhSachTruyenOffline.setTenTruyen(cursor.getString(0));
+                danhSachTruyenOffline.setTomTatTruyen(cursor.getString(1));
+                danhSachTruyenOffline.setBiaTruyen(cursor.getString(2));
+                danhSachTruyenOffline.setNoiDungTruyen(cursor.getString(3));
+
+                danhSachTruyenArrayList.add(danhSachTruyenOffline);
+            } while (cursor.moveToNext());
+        }
+
+        return danhSachTruyenArrayList;
+    }
+
     public boolean isTruyenVuaDocOnlineAvalable(String tenTruyen, String link) {
         ArrayList<DanhSachTruyenOnline> danhSachTruyenArrayList = new ArrayList<>();
         boolean a ;
@@ -124,6 +158,27 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 danhSachTruyenOnline.setLinkTruyen(cursor.getString(3));
 
                 danhSachTruyenArrayList.add(danhSachTruyenOnline);
+            } while (cursor.moveToNext());
+        }
+        a = danhSachTruyenArrayList.size() > 0;
+
+        return a;
+    }
+
+    public boolean isTruyenVuaDocOfflineAvalable(String tenTruyen, String biaTruyen) {
+        ArrayList<DanhSachTruyenOffline> danhSachTruyenArrayList = new ArrayList<>();
+        boolean a;
+        String sSQL = "SELECT  * FROM tbTruyenVuaDocOffline WHERE tenTruyen='" + tenTruyen + "' AND biaTruyen='" + biaTruyen + "'";
+        SQLiteDatabase db = this.getReadableDatabase();
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery(sSQL, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                DanhSachTruyenOffline danhSachTruyenOffline = new DanhSachTruyenOffline();
+                danhSachTruyenOffline.setTenTruyen(cursor.getString(0));
+                danhSachTruyenOffline.setBiaTruyen(cursor.getString(2));
+
+                danhSachTruyenArrayList.add(danhSachTruyenOffline);
             } while (cursor.moveToNext());
         }
         a = danhSachTruyenArrayList.size() > 0;

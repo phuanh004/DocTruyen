@@ -3,6 +3,7 @@ package com.anhpppd01336.doctruyen;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,19 +11,21 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.anhpppd01336.doctruyen.Data.BaseActivity;
+import com.anhpppd01336.doctruyen.Data.DanhSachTruyenOffline;
 import com.anhpppd01336.doctruyen.Data.DanhSachTruyenOnline;
 import com.anhpppd01336.doctruyen.Sqlite.DatabaseHandler;
 import com.squareup.picasso.Picasso;
 
-public class ThongTinTruyen extends BaseActivity {
+public class ThongTinTruyen extends AppCompatActivity {
 
     TextView tvThongTinTitle, tvThongTinTomTat;
     ImageView imgThongTinBiaTruyen;
     Button btnDocTruyen;
+    FloatingActionButton fab;
 
     private String type, link, title, tomtat, image;
     private DatabaseHandler db = new DatabaseHandler(ThongTinTruyen.this);
+    private boolean check, check2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +35,7 @@ public class ThongTinTruyen extends BaseActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
 
         tvThongTinTitle = (TextView) findViewById(R.id.tvThongTinTitle);
         tvThongTinTomTat = (TextView) findViewById(R.id.tvThongTinTomTat);
@@ -49,18 +52,29 @@ public class ThongTinTruyen extends BaseActivity {
         tvThongTinTitle.setText(title);
         tvThongTinTomTat.setText(tomtat);
         Picasso.with(this).load(image).into(imgThongTinBiaTruyen);
-        if (db.isTruyenVuaDocOnlineAvalable(title,link)) {
-            fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_star_24dp));
-            db.deleteTruyenVuaDocOnline(title,link);
-        }else {
-            fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_star_outline_24dp));
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    db.addDataTruyenVuaDocOnline(new DanhSachTruyenOnline(image,title,tomtat,link));
-                }
-            });
-        }
+
+
+//        if (check) {
+//            fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_star_24dp));
+//            fab.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    db.deleteTruyenVuaDocOnline(title, link);
+//                    Snackbar.make(v, "Truyện vừa bị xóa khỏi danh sách yêu thích !", Snackbar.LENGTH_SHORT).show();
+//                    check = false;
+//                }
+//            });
+//        }else {
+//            fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_star_outline_24dp));
+//            fab.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    db.addDataTruyenVuaDocOnline(new DanhSachTruyenOnline(image, title, tomtat, link));
+//                    Snackbar.make(v, "Đã thêm vào danh sách yêu thích !", Snackbar.LENGTH_SHORT).show();
+//                    check = true;
+//                }
+//            });
+//        }
 
         btnDocTruyen.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +84,19 @@ public class ThongTinTruyen extends BaseActivity {
                         Intent intent = new Intent(ThongTinTruyen.this, DocTruyenOnlineActivity.class);
                         intent.putExtra("url", link);
                         startActivity(intent);
+                        check = db.isTruyenVuaDocOnlineAvalable(title, link);
+                        if (!check) {
+                            db.addDataTruyenVuaDocOnline(new DanhSachTruyenOnline(image, title, tomtat, link));
+                        }
+                        break;
+                    case "offline":
+                        Intent intentOff = new Intent(ThongTinTruyen.this, DocTruyenOffineActivity.class);
+                        intentOff.putExtra("noidungtruyen", link);
+                        startActivity(intentOff);
+                        check2 = db.isTruyenVuaDocOfflineAvalable(title, image);
+                        if (!check2) {
+                            db.addDataTruyenVuaDocOffline(new DanhSachTruyenOffline(image, title, tomtat, link));
+                        }
                         break;
                 }
             }

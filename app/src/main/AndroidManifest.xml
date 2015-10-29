@@ -32,6 +32,11 @@
             android:label="@string/title_activity_doc_truyen_online"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+        <activity
+            android:name=".DocTruyenOffineActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_doc_truyen_offine"
+            android:theme="@style/FullscreenTheme"></activity>
     </application>
 
 </manifest>

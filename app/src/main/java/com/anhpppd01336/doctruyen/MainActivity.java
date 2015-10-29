@@ -1,27 +1,18 @@
 package com.anhpppd01336.doctruyen;
 
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
-import com.anhpppd01336.doctruyen.Data.BaseActivity;
-
-public class MainActivity extends BaseActivity
+public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
@@ -88,6 +79,9 @@ public class MainActivity extends BaseActivity
             case R.id.nav_trang_chu:
                 fragment = new TrangChuFragment();
                 break;
+            case R.id.nav_truyen_vua_doc:
+                fragment = new TruyenVuaDocFragment();
+                break;
             case R.id.nav_truyen_cua_toi:
                 fragment = new TruyenCuaToiFragment();
                 break;
@@ -96,6 +90,18 @@ public class MainActivity extends BaseActivity
                 break;
             case R.id.nav_truyen_tranh_online:
                 fragment = new TruyenTranhOnlineFragment();
+                break;
+            case R.id.nav_truyen_tranh_offline:
+                fragment = new TruyenTranhOffineFragment();
+                break;
+            case R.id.nav_truyen_chu_offline:
+                fragment = new TruyenChuOfflineFragment();
+                break;
+            case R.id.nav_cai_dat:
+                fragment = new CaiDatFragment();
+                break;
+            case R.id.nav_ho_tro:
+                fragment = new GioiThieuFragment();
                 break;
         }
 
